@@ -19,7 +19,7 @@ func (s *ComodoSuite) Fatal(args ...interface{}) {
 	s.T().Fatal(args...)
 }
 
-// NotEqualFail fails if assert fails
+// NotEqualFail is equivalent to NotEqual followed by FailNow if assert fails.
 func (s *ComodoSuite) NotEqualFail(expected interface{}, actual interface{}, msgAndArgs ...interface{}) bool {
 	var notEqual = s.Suite.NotEqual(expected, actual, msgAndArgs)
 	if !notEqual {
@@ -28,7 +28,7 @@ func (s *ComodoSuite) NotEqualFail(expected interface{}, actual interface{}, msg
 	return notEqual
 }
 
-// EqualFail fails if assert fails
+// EqualFail is equivalent to Equal followed by FailNow if assert fails.
 func (s *ComodoSuite) EqualFail(expected interface{}, actual interface{}, msgAndArgs ...interface{}) bool {
 	var equal = s.Suite.Equal(expected, actual, msgAndArgs)
 	if !equal {
@@ -37,7 +37,7 @@ func (s *ComodoSuite) EqualFail(expected interface{}, actual interface{}, msgAnd
 	return equal
 }
 
-// NoErrorFail fails if assert fails
+// NoErrorFail is equivalent to NoError followed by FailNow if assert fails.
 func (s *ComodoSuite) NoErrorFail(err error, msgAndArgs ...interface{}) bool {
 	var noError = s.Suite.NoError(err, msgAndArgs)
 	if !noError {
