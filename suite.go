@@ -18,3 +18,21 @@ func (s *ComodoSuite) Fatalf(msg string, args ...interface{}) {
 func (s *ComodoSuite) Fatal(args ...interface{}) {
 	s.T().Fatal(args...)
 }
+
+// NotEqualFail fails if assert fails
+func (s *ComodoSuite) NotEqualFail(expected interface{}, actual interface{}, msgAndArgs ...interface{}) bool {
+	var notEqual = s.Suite.NotEqual(expected, actual, msgAndArgs)
+	if !notEqual {
+		s.Suite.T().FailNow()
+	}
+	return notEqual
+}
+
+// EqualFail fails if assert fails
+func (s *ComodoSuite) EqualFail(expected interface{}, actual interface{}, msgAndArgs ...interface{}) bool {
+	var equal = s.Suite.Equal(expected, actual, msgAndArgs)
+	if !equal {
+		s.Suite.T().FailNow()
+	}
+	return equal
+}
