@@ -1,3 +1,4 @@
+// Package comodo is a wrapper over github.com/stretchr/testify/suite aimed to make it's use easier and comfortable
 package comodo
 
 import (
