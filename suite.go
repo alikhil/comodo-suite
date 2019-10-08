@@ -36,3 +36,12 @@ func (s *ComodoSuite) EqualFail(expected interface{}, actual interface{}, msgAnd
 	}
 	return equal
 }
+
+// NoErrorFail fails if assert fails
+func (s *ComodoSuite) NoErrorFail(err error, msgAndArgs ...interface{}) bool {
+	var noError = s.Suite.NoError(err, msgAndArgs)
+	if !noError {
+		s.Suite.T().FailNow()
+	}
+	return noError
+}
