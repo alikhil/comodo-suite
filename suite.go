@@ -10,6 +10,10 @@ type Suite struct {
 	suite.Suite
 }
 
+func (s *Suite) fail() {
+	s.Suite.T().FailNow()
+}
+
 // Fatalf is equivalent to Logf followed by FailNow.
 func (s *Suite) Fatalf(msg string, args ...interface{}) {
 	s.T().Fatalf(msg, args...)
@@ -24,7 +28,7 @@ func (s *Suite) Fatal(args ...interface{}) {
 func (s *Suite) NotEqualFail(expected interface{}, actual interface{}, msgAndArgs ...interface{}) bool {
 	var notEqual = s.Suite.NotEqual(expected, actual, msgAndArgs...)
 	if !notEqual {
-		s.Suite.T().FailNow()
+		s.fail()
 	}
 	return notEqual
 }
@@ -33,7 +37,7 @@ func (s *Suite) NotEqualFail(expected interface{}, actual interface{}, msgAndArg
 func (s *Suite) EqualFail(expected interface{}, actual interface{}, msgAndArgs ...interface{}) bool {
 	var equal = s.Suite.Equal(expected, actual, msgAndArgs...)
 	if !equal {
-		s.Suite.T().FailNow()
+		s.fail()
 	}
 	return equal
 }
@@ -42,7 +46,25 @@ func (s *Suite) EqualFail(expected interface{}, actual interface{}, msgAndArgs .
 func (s *Suite) NoErrorFail(err error, msgAndArgs ...interface{}) bool {
 	var noError = s.Suite.NoError(err, msgAndArgs...)
 	if !noError {
-		s.Suite.T().FailNow()
+		s.fail()
 	}
 	return noError
+}
+
+// TrueFail is equivalent to True followed by FailNow if assert fails
+func (s *Suite) TrueFail(value bool, msgAndArgs ...interface{}) bool {
+	var trueA = s.Suite.True(value, msgAndArgs...)
+	if !trueA {
+		s.fail()
+	}
+	return trueA
+}
+
+// FalseFail is equivalent to False followed by FailNow if assert fails
+func (s *Suite) FalseFail(value bool, msgAndArgs ...interface{}) bool {
+	var falseA = s.Suite.False(value, msgAndArgs...)
+	if !falseA {
+		s.fail()
+	}
+	return falseA
 }
