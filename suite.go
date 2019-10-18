@@ -86,3 +86,21 @@ func (s *Suite) NilFail(value interface{}, msgAndArgs ...interface{}) bool {
 	}
 	return isNil
 }
+
+// EmptyFail is equivalent to Empty followed by FailNow if assert fails
+func (s *Suite) EmptyFail(object interface{}, msgAndArgs ...interface{}) bool {
+	var empty = s.Suite.Empty(object, msgAndArgs...)
+	if !empty {
+		s.fail()
+	}
+	return empty
+}
+
+// NotEmptyFail is equivalent to NotEmpty followed by FailNow if assert fails
+func (s *Suite) NotEmptyFail(object interface{}, msgAndArgs ...interface{}) bool {
+	var notEmpty = s.Suite.NotEmpty(object, msgAndArgs...)
+	if !notEmpty {
+		s.fail()
+	}
+	return notEmpty
+}
