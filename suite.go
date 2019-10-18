@@ -70,7 +70,7 @@ func (s *Suite) FalseFail(value bool, msgAndArgs ...interface{}) bool {
 }
 
 // NotNilFail is equivalent to NotNil followed by FailNow if assert fails
-func (s *Suite) NotNilFail(value bool, msgAndArgs ...interface{}) bool {
+func (s *Suite) NotNilFail(value interface{}, msgAndArgs ...interface{}) bool {
 	var notNil = s.Suite.NotNil(value, msgAndArgs...)
 	if !notNil {
 		s.fail()
@@ -79,7 +79,7 @@ func (s *Suite) NotNilFail(value bool, msgAndArgs ...interface{}) bool {
 }
 
 // NilFail is equivalent to Nil followed by FailNow if assert fails
-func (s *Suite) NilFail(value bool, msgAndArgs ...interface{}) bool {
+func (s *Suite) NilFail(value interface{}, msgAndArgs ...interface{}) bool {
 	var isNil = s.Suite.Nil(value, msgAndArgs...)
 	if !isNil {
 		s.fail()
